@@ -1,15 +1,19 @@
 package main
 
 import (
+	"attendance-record/infrastructure/log"
 	"attendance-record/infrastructure/router"
-	"log"
+	"attendance-record/model"
 )
 
 func main() {
-	webServer, err := router.NewWebServerFactory(router.InstanceEcho, "8080")
-	if err != nil {
-		log.Fatalln(err)
-	}
+	sqlDB := model.DBConnection()
+	defer sqlDB.Close()
 
+	webServer := router.NewWebServerFactory(
+		router.InstanceEcho,
+		log.InstanceZapLogger,
+		"8080",
+	)
 	webServer.Listen()
 }

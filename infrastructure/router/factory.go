@@ -4,6 +4,8 @@ import (
 	"errors"
 	"log"
 	"strconv"
+
+	ilog "attendance-record/infrastructure/log"
 )
 
 type Server interface {
@@ -20,16 +22,22 @@ const (
 	InstanceEcho int = iota
 )
 
-func NewWebServerFactory(instance int, port string) (Server, error) {
-	p, err := strconv.ParseInt(port, 10, 64)
+func NewWebServerFactory(instance int, logInstance int, port string) Server {
+	l, err := ilog.NewLoggerFactory(logInstance)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
+	p, err := strconv.ParseInt(port, 10, 64)
+	if err != nil {
+		l.Fatalln(err)
+	}
+
 	switch instance {
 	case InstanceEcho:
-		return newEchoServer(Port(p)), nil
+		return newEchoServer(l, Port(p))
 	default:
-		return nil, errInvalidWebServerInstance
+		l.Fatalln(errInvalidWebServerInstance)
 	}
+	return nil
 }

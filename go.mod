@@ -5,6 +5,7 @@ go 1.22.1
 require (
 	github.com/google/uuid v1.6.0
 	github.com/labstack/echo/v4 v4.12.0
+	github.com/pkg/errors v0.9.1
 	github.com/satori/go.uuid v1.2.0
 	go.uber.org/zap v1.27.0
 	gorm.io/driver/sqlite v1.5.5

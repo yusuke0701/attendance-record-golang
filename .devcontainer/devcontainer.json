@@ -2,7 +2,7 @@
 	"name": "Go",
 	"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
 	"features": {
-		"ghcr.io/meaningful-ooo/devcontainer-features/fish:1": {}
+		"ghcr.io/meaningful-ooo/devcontainer-features/fish:2": {}
 	},
 	"customizations": {
 		"vscode": {
